@@ -1,3 +1,3 @@
 pub mod users;
 
-pub use self::users::{User, NewUser};
+pub use self::users::{NewUser, User};

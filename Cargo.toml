@@ -9,9 +9,13 @@ version = "*"
 [dependencies.router]
 version = "*"
 
+[dependencies.params]
+version = "*"
+
 [dependencies.iron_diesel_middleware]
 git = "https://github.com/darayus/iron-diesel-middleware"
 
 [dependencies]
 diesel = { version = "*", features = ["sqlite"] }
-dotenv = "0.9.0"
+dotenv = "*"
+askama = { version = "*", features = ["with-iron"], git = "https://github.com/hajifkd/askama" }
