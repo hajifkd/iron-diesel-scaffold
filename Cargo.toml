@@ -19,3 +19,6 @@ git = "https://github.com/darayus/iron-diesel-middleware"
 diesel = { version = "*", features = ["sqlite"] }
 dotenv = "*"
 askama = { version = "*", features = ["with-iron"], git = "https://github.com/djc/askama" }
+
+[build-dependencies]
+askama = { version = "*", features = ["with-iron"], git = "https://github.com/djc/askama" }
