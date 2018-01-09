@@ -8,14 +8,14 @@ pub struct BaseTemplate<'a> {
 
 #[derive(Template)]
 #[template(path = "index.html")]
-pub struct IndexTemplate<'a, 'b> {
+pub struct IndexTemplate<'a> {
     pub _parent: BaseTemplate<'a>,
-    pub name: &'b str,
+    pub name: &'a str,
 }
 
 #[derive(Template)]
 #[template(path = "list_user.html")]
-pub struct ListUserTemplate<'a, 'b> {
+pub struct ListUserTemplate<'a> {
     pub _parent: BaseTemplate<'a>,
-    pub users: &'b [::db::models::User],
+    pub users: &'a [::db::models::User],
 }
