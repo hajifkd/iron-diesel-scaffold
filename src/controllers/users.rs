@@ -34,9 +34,10 @@ pub fn insert(req: &mut Request) -> IronResult<Response> {
     use db::schema::users;
     use db::models::NewUser;
 
-    let url = url_for!(req, "list_user");
-
-    let params = req.get_ref::<Params>().unwrap();
+    // I don't believe this need to be `get_ref`
+    // as long as param is computed only once
+    // See https://github.com/reem/rust-plugin/blob/master/src/lib.rs.
+    let params = req.compute::<Params>().unwrap();
 
     if let (Some(&Value::String(ref name)), Some(&Value::String(ref email))) =
         (params.get("name"), params.get("email"))
@@ -51,7 +52,10 @@ pub fn insert(req: &mut Request) -> IronResult<Response> {
             .execute(&*con)
             .expect("INSERT failed");
 
-        Ok(Response::with((status::Found, Redirect(url))))
+        Ok(Response::with((
+            status::Found,
+            Redirect(url_for!(req, "list_user")),
+        )))
     } else {
         Ok(Response::with(status::NotFound))
     }
