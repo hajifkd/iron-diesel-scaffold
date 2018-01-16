@@ -34,17 +34,20 @@ pub fn insert(req: &mut Request) -> IronResult<Response> {
     use db::schema::users;
     use db::models::NewUser;
 
-    // I don't believe this need to be `get_ref`
-    // as long as param is computed only once
-    // See https://github.com/reem/rust-plugin/blob/master/src/lib.rs.
-    let params = req.compute::<Params>().unwrap();
-
-    if let (Some(&Value::String(ref name)), Some(&Value::String(ref email))) =
-        (params.get("name"), params.get("email"))
-    {
+    if let (Some(Value::String(name)), Some(Value::String(email))) = {
+        // However, considering the possibility that some of the middleware uses
+        // Params plugin, using the reference may be better.
+        // To be honest, `compute` is actually possible
+        // unless large files are treated or something like that.
+        let params = req.get_ref::<Params>().unwrap();
+        (
+            params.get("name").map(Value::clone),
+            params.get("email").map(Value::clone),
+        )
+    } {
         let new_user = NewUser {
-            name: name,
-            email: email,
+            name: &name,
+            email: &email,
         };
 
         diesel::insert_into(users::table)
