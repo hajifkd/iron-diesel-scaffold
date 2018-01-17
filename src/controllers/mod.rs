@@ -2,7 +2,6 @@ pub mod users;
 
 use iron::prelude::*;
 use iron::status;
-use iron::headers::ContentType;
 use router::Router;
 
 use templates;
@@ -23,7 +22,6 @@ fn index(req: &mut Request) -> IronResult<Response> {
         .find("name")
         .unwrap_or("hoge");
     Ok(Response::with((
-        ContentType::html().0,
         status::Ok,
         templates::IndexTemplate {
             _parent: templates::BaseTemplate { title: "index" },

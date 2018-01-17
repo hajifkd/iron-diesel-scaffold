@@ -1,6 +1,5 @@
 use iron::prelude::*;
 use iron::status;
-use iron::headers::ContentType;
 use iron::modifiers::Redirect;
 
 use diesel;
@@ -19,7 +18,6 @@ pub fn list(req: &mut Request) -> IronResult<Response> {
     let results = users.load::<User>(&*con).expect("Error reading DB");
 
     Ok(Response::with((
-        ContentType::html().0,
         status::Ok,
         templates::ListUserTemplate {
             _parent: templates::BaseTemplate { title: "list user" },
