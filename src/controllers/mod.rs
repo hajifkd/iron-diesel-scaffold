@@ -2,17 +2,23 @@ pub mod users;
 
 use iron::prelude::*;
 use iron::status;
+use mount::Mount;
 use router::Router;
 
 use templates;
 
-pub fn router() -> Router {
-    router!(
-    index:      get   "/"               => index,
-    index_q:    get   "/:name"          => index,
-    insert:     post  "/insert/"        => users::insert,
-    list_user:  get   "/list/"          => users::list
-  )
+pub fn router() -> Mount {
+    let router = router!(
+        index:      get   "/"               => index,
+        index_q:    get   "/:name"          => index,
+        insert:     post  "/insert/"        => users::insert,
+        list_user:  get   "/list/"          => users::list
+    );
+
+    let mut mount = Mount::new();
+    mount.mount("/", router);
+
+    mount
 }
 
 fn index(req: &mut Request) -> IronResult<Response> {

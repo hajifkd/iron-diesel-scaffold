@@ -2,11 +2,18 @@
 name = "iron-diesel-scaffold"
 version = "0.1.0"
 authors = ["Hajime Fukuda <hajime.fukuda@me.com>"]
+build = "build.rs"
 
 [dependencies.iron]
 version = "*"
 
 [dependencies.router]
+version = "*"
+
+[dependencies.mount]
+version = "*"
+
+[dependencies.staticfile]
 version = "*"
 
 [dependencies.params]

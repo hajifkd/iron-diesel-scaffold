@@ -6,11 +6,12 @@ use diesel;
 use diesel::prelude::*;
 use iron_diesel_middleware::{DieselPooledConnection, DieselReqExt};
 use params::{Params, Value};
+use db;
 
 use templates;
 
 pub fn list(req: &mut Request) -> IronResult<Response> {
-    let con: DieselPooledConnection<diesel::SqliteConnection> = req.db_conn();
+    let con: DieselPooledConnection<db::SqlConnection> = req.db_conn();
 
     use db::schema::users::dsl::*;
     use db::models::User;
@@ -27,7 +28,7 @@ pub fn list(req: &mut Request) -> IronResult<Response> {
 }
 
 pub fn insert(req: &mut Request) -> IronResult<Response> {
-    let con: DieselPooledConnection<diesel::SqliteConnection> = req.db_conn();
+    let con: DieselPooledConnection<db::SqlConnection> = req.db_conn();
 
     use db::schema::users;
     use db::models::NewUser;
