@@ -14,6 +14,7 @@
   <form method="POST" action="../insert/">
     <input name="name" placeholder="name" />
     <input name="email" placeholder="email" />
+    <input name="{{ query_key }}" value="{{ _parent.csrf_token }}" type="hidden" />
     <button type="submit">submit</button>
   </form>
 {% endblock %}

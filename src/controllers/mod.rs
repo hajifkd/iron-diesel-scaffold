@@ -5,7 +5,7 @@ use iron::status;
 use mount::Mount;
 use router::Router;
 
-use templates;
+use templates::{self, BaseTemplate};
 
 pub fn router() -> Mount {
     let router = router!(
@@ -26,12 +26,13 @@ fn index(req: &mut Request) -> IronResult<Response> {
         .get::<Router>()
         .unwrap()
         .find("name")
-        .unwrap_or("hoge");
+        .unwrap_or("hoge")
+        .to_owned();
     Ok(Response::with((
         status::Ok,
         templates::IndexTemplate {
-            _parent: templates::BaseTemplate { title: "index" },
-            name: name,
+            _parent: BaseTemplate::new(req, "index"),
+            name: &name,
         },
     )))
 }

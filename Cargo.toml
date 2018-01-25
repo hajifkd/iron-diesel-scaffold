@@ -23,9 +23,11 @@ version = "*"
 git = "https://github.com/darayus/iron-diesel-middleware"
 
 [dependencies]
+iron-sessionstorage = { version = "^0.6.6", git = "https://github.com/iron/iron-sessionstorage.git" }
 diesel = { version = "*", features = ["sqlite"] }
 dotenv = "*"
 askama = { version = "*", features = ["with-iron"], git = "https://github.com/hajifkd/askama", branch="iron-contenttype" }
+iron-csrf-middleware= { version = "*", path = "../iron-csrf-middleware" }
 
 [build-dependencies]
 askama = { version = "*", features = ["with-iron"], git = "https://github.com/hajifkd/askama", branch="iron-contenttype" }

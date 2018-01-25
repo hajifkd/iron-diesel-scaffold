@@ -7,6 +7,7 @@ use diesel::prelude::*;
 use iron_diesel_middleware::{DieselPooledConnection, DieselReqExt};
 use params::{Params, Value};
 use db;
+use templates::BaseTemplate;
 
 use templates;
 
@@ -21,7 +22,7 @@ pub fn list(req: &mut Request) -> IronResult<Response> {
     Ok(Response::with((
         status::Ok,
         templates::ListUserTemplate {
-            _parent: templates::BaseTemplate { title: "list user" },
+            _parent: BaseTemplate::new(req, "list user"),
             users: &results,
         },
     )))
