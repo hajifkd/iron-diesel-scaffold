@@ -14,7 +14,7 @@ impl<'a> BaseTemplate<'a> {
         BaseTemplate {
             title: title,
             csrf_token: req.csrf_token(),
-            query_key: ::iron_csrf_middleware::QUERY_KEY
+            query_key: ::iron_csrf_middleware::QUERY_KEY,
         }
     }
 }

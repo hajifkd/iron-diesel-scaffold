@@ -2,14 +2,14 @@
 extern crate diesel;
 extern crate dotenv;
 extern crate iron;
+extern crate iron_csrf_middleware;
 extern crate iron_diesel_middleware;
+extern crate iron_sessionstorage;
 extern crate mount;
 extern crate params;
 #[macro_use]
 extern crate router;
 extern crate staticfile;
-extern crate iron_sessionstorage;
-extern crate iron_csrf_middleware;
 
 use std::path::Path;
 use iron::prelude::*;
