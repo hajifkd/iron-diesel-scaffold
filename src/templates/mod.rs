@@ -6,7 +6,6 @@ use iron_csrf_middleware::CsrfReqExt;
 pub struct BaseTemplate<'a> {
     pub title: &'a str,
     pub csrf_token: String,
-    pub query_key: &'static str,
 }
 
 impl<'a> BaseTemplate<'a> {
@@ -14,8 +13,11 @@ impl<'a> BaseTemplate<'a> {
         BaseTemplate {
             title: title,
             csrf_token: req.csrf_token(),
-            query_key: ::iron_csrf_middleware::QUERY_KEY,
         }
+    }
+
+    fn query_key(&self) -> &'static str {
+        ::iron_csrf_middleware::QUERY_KEY
     }
 }
 
